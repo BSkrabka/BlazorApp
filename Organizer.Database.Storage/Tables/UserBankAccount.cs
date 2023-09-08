@@ -13,9 +13,9 @@ public class UserBankAccount
 
     [ForeignKey(nameof(User))]
     public Guid UserId { get; set; }
-    public virtual required User User { get; set; }
+    public virtual User User { get; set; }
 
     [ForeignKey(nameof(BankAccount))]
     public Guid BankAccountId { get; set; }
-    public virtual required BankAccount BankAccount { get; set; }
+    public virtual BankAccount BankAccount { get; set; }
 }

@@ -1,0 +1,38 @@
+﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Zaloguj się</h5>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Zamknij" @onclick="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @if (ShowAuthError)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <p>@Error</p>
+                </div>
+            }
+            <div class="modal-body">
+                <EditForm Model="Request" OnSubmit="Login">
+                    <div class="form-group">
+                        <label for="email">Login:</label>
+                        <InputText @bind-Value="Request.Login" type="login" class="form-control" id="login" placeholder="Login" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Hasło:</label>
+                        <InputText @bind-Value="Request.Password" type="password" class="form-control" id="password" placeholder="Hasło" />
+                    </div>
+                </EditForm>
+            </div>
+            <div class="modal-footer">
+                <button @onclick="Close" type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                <button @onclick="Login" type="submit" class="btn btn-primary">Zaloguj</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}

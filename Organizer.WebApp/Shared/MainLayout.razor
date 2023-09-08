@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager _nav
+
 
 <PageTitle>Organizer</PageTitle>
 
@@ -8,12 +10,32 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
+        <LoginModal @ref="Modal"></LoginModal>
+        <AuthorizeView>
+        <NotAuthorized>
+            <div class="top-row px-4">
+                <button class="btn btn-primary" @onclick="() => Modal.Open()">Zaloguj</button>
+            </div>
+        </NotAuthorized>
+        <Authorized>
+            <div class="top-row px-4">
+                <button class="btn btn-primary" @onclick="@(() => _nav.NavigateTo("/logout"))">Wyloguj</button>
+            </div>
+        </Authorized>
+        </AuthorizeView>
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
+
+@code
+{
+    private LoginModal Modal { get; set; }
+    private bool showLoginModal;
+
+    private void ShowLoginModal()
+    {
+        showLoginModal = true;
+    }
+}

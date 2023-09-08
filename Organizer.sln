@@ -5,15 +5,15 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Organizer.WebApp", "Organizer.WebApp\Organizer.WebApp.csproj", "{FE0055E3-3186-4C49-9F13-566758773BDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Organizer.Database.Storage", "Organizer.Database.Storage\Organizer.Database.Storage.csproj", "{B629E0E2-1F27-4971-8A41-12FC25A0171C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Organizer.Database.Storage", "Organizer.Database.Storage\Organizer.Database.Storage.csproj", "{B629E0E2-1F27-4971-8A41-12FC25A0171C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oragnizer.Lib.Core", "Oragnizer.Lib.Core\Oragnizer.Lib.Core.csproj", "{C1F30EF0-AB9B-407F-B86C-9C87DFE1509D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Organizer.Lib.Core", "Oragnizer.Lib.Core\Organizer.Lib.Core.csproj", "{C1F30EF0-AB9B-407F-B86C-9C87DFE1509D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Organizer.Lib.Helper", "Organizer.Lib.Helper\Organizer.Lib.Helper.csproj", "{B1272C72-B10E-4682-8CDF-E63543C08015}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Organizer.Lib.Helper", "Organizer.Lib.Helper\Organizer.Lib.Helper.csproj", "{B1272C72-B10E-4682-8CDF-E63543C08015}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Organizer.Lib.Extension", "Organizer.Lib.Extension\Organizer.Lib.Extension.csproj", "{E9340B7F-769B-4952-AEA4-CD70E5535C9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Organizer.Lib.Extension", "Organizer.Lib.Extension\Organizer.Lib.Extension.csproj", "{E9340B7F-769B-4952-AEA4-CD70E5535C9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Organizer.Lib.Common", "Organizer.Lib.Common\Organizer.Lib.Common.csproj", "{3E6F91AF-C3C7-4EFD-AC51-E6EEA01CACE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Organizer.Lib.Common", "Organizer.Lib.Common\Organizer.Lib.Common.csproj", "{3E6F91AF-C3C7-4EFD-AC51-E6EEA01CACE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

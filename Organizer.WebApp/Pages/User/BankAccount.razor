@@ -1,0 +1,32 @@
+﻿@page "/user/bankAccount"
+@using Organizer.Lib.Helper.Enums
+<AddBankAccountModal Create="Create" @ref="Modal"></AddBankAccountModal>
+<div class="row pb-2">
+    <h3>BankAccount</h3>
+    <div class="col-md-12 text-end">
+        <button type="button" class="btn btn-success" @onclick="() => Modal.Open()">Dodaj konto</button>
+    </div>
+</div>
+<div class="bank-container">
+    @foreach (var bank in BankAccounts.Where(ba => ba.BankAccountPermission == EntityPermissionEnum.Owner))
+    {
+        <div class="bank-card">
+            <div class="text-end">
+                <button class="btn btn-danger btn-close" @onclick="() => Remove(bank.Id)"></button>
+            </div>
+            <h4 class="text-center">@bank.Name</h4>
+            <p>Wartość: @bank.Value</p>
+            <p>Numer konta: @bank.AccountNumber</p>
+        </div>
+    }
+</div>
+<div class="bank-container">
+    @foreach (var bank in BankAccounts.Where(ba => ba.BankAccountPermission == EntityPermissionEnum.User))
+    {
+        <div class="bank-card">
+            <h4>@bank.Name</h4>
+            <p>Wartość: @bank.Value</p>
+            <p>Numer konta: @bank.AccountNumber</p>
+        </div>
+    }
+</div>

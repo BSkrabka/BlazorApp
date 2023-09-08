@@ -2,14 +2,17 @@
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 using Organizer.Database.Storage.Tables;
+using Organizer.Database.Storage.Providers;
 
 namespace Organizer.Database.Storage;
 
 public class OrganizerDbContext : DbContext
 {
+    private readonly IUserProvider _userProvider;
 
-    public OrganizerDbContext(DbContextOptions<OrganizerDbContext> options) : base(options)
+    public OrganizerDbContext(DbContextOptions<OrganizerDbContext> options, IUserProvider userProvider) : base(options)
     {
+        _userProvider = userProvider;
     }
 
     public virtual DbSet<User> Users { get; set; }
@@ -43,45 +46,40 @@ public class OrganizerDbContext : DbContext
         }
     }
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        UpdateSoftDeleteStatus();
-        return base.SaveChangesAsync(cancellationToken);
+        await UpdateSoftDeleteStatus();
+        return await base.SaveChangesAsync(cancellationToken);
     }
 
-    public override int SaveChanges()
-    {
-        UpdateSoftDeleteStatus();
-        return base.SaveChanges();
-    }
-
-    public override int SaveChanges(bool acceptAllChangesOnSuccess)
-    {
-        UpdateSoftDeleteStatus();
-        return base.SaveChanges(acceptAllChangesOnSuccess);
-    }
-
-    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
+    public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
         CancellationToken cancellationToken = default)
     {
-        UpdateSoftDeleteStatus();
-        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        await UpdateSoftDeleteStatus();
+        return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 
-    private void UpdateSoftDeleteStatus()
+    private async Task UpdateSoftDeleteStatus()
     {
         foreach (var entry in ChangeTracker.Entries())
         {
             if (entry.Entity is BaseEntity baseEntity)
             {
-                if (entry.State == EntityState.Added)
+                switch (entry.State)
                 {
-                    baseEntity.CreatedAt = DateTime.Now;
-                }
-                else if (entry.State == EntityState.Deleted)
-                {
-                    entry.State = EntityState.Modified;
-                    baseEntity.DeletedAt = DateTime.Now;
+                    case EntityState.Added:
+                        baseEntity.CreatedAt = DateTime.Now;
+                        baseEntity.CreatedById = await _userProvider.GetUserId();
+                        break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        baseEntity.DeletedById = await _userProvider.GetUserId();
+                        baseEntity.DeletedAt = DateTime.Now;
+                        break;
+                    case EntityState.Modified:
+                        baseEntity.LastModifiedById = await _userProvider.GetUserId();
+                        baseEntity.LastModifiedAt = DateTime.Now;
+                        break;
                 }
             }
         }

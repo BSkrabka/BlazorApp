@@ -1,0 +1,35 @@
+﻿@page "/admin/users"
+<div class="container">
+    <div class="row">
+        <h3>User Management</h3>
+        <div class="col-md-12 text-end">
+            <button type="button" class="btn btn-success">Dodaj użytkownika</button>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Login</th>
+            <th>Email</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Users)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Surname</td>
+                <td>@user.Login</td>
+                <td>@user.Email</td>
+                <td>
+                    <button class="btn btn-danger" @onclick="() => DeleteUser(user.Id)">Usuń</button>
+                    <button class="btn btn-primary" @onclick="() => ShowDetails(user.Id)">Szczegóły</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
