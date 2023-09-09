@@ -16,30 +16,27 @@ public partial class AddBankAccountModal
     [Parameter]
     public Func<Task> Create { get; set; }
 
-    public string ModalDisplay = "none;";
-    public string ModalClass = string.Empty;
     public bool ShowBackdrop = false;
     public bool ShowAddError { get; set; }
     public string Error { get; set; }
     public BankAccountCreateRequest Request = new();
 
-    public void Open()
+    private bool showModal;
+
+    public void ShowModal()
     {
-        ModalDisplay = "block;";
-        ModalClass = "Show";
+        showModal = true;
         ShowBackdrop = true;
         StateHasChanged();
     }
 
-    public void Close()
+    private void CloseModal()
     {
-        ModalDisplay = "none";
-        ModalClass = "";
+        showModal = false;
         ShowBackdrop = false;
-        StateHasChanged();
     }
 
-    public async Task CreateBank()
+    private async Task CreateBank()
     {
         var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var result = Guid.TryParse(authenticationState.User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
@@ -47,6 +44,6 @@ public partial class AddBankAccountModal
         await BankAccountService.CreateBankAccount(Request, userId);
         await Create();
         Request = new();
-        Close();
+        CloseModal();
     }
 }

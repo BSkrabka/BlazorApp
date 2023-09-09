@@ -1,32 +1,55 @@
 ﻿@page "/user/bankAccount"
 @using Organizer.Lib.Helper.Enums
+
 <AddBankAccountModal Create="Create" @ref="Modal"></AddBankAccountModal>
+<BaseModal @ref="baseModal"></BaseModal>
 <div class="row pb-2">
-    <h3>BankAccount</h3>
     <div class="col-md-12 text-end">
-        <button type="button" class="btn btn-success" @onclick="() => Modal.Open()">Dodaj konto</button>
+        <button type="button" class="btn btn-success" @onclick="ShowAddModal">Dodaj konto</button>
     </div>
+</div>
+<div class="text-center pb-2">
+    <h3>Twoje konta</h3>
 </div>
 <div class="bank-container">
     @foreach (var bank in BankAccounts.Where(ba => ba.BankAccountPermission == EntityPermissionEnum.Owner))
     {
-        <div class="bank-card">
-            <div class="text-end">
-                <button class="btn btn-danger btn-close" @onclick="() => Remove(bank.Id)"></button>
+        <div class="bank-card rounded-3 bg-light text-dark">
+            <div class="col-md-12">
+                <div class="text-end">
+                    <button class="btn btn-danger" @onclick="() => ShowConfirmationModal(bank.Id)">
+                        <span class="oi oi-trash" aria-hidden="true"></span>
+                    </button>
+                </div>
             </div>
             <h4 class="text-center">@bank.Name</h4>
-            <p>Wartość: @bank.Value</p>
+            <p>Stan konta: @bank.Value</p>
             <p>Numer konta: @bank.AccountNumber</p>
+            <div class="text-end">
+                <a class="btn btn-info" href="/user/bank-account/@bank.Id">
+                    <span class="oi oi-brush" aria-hidden="true"></span>
+                </a>
+            </div>
         </div>
     }
 </div>
-<div class="bank-container">
-    @foreach (var bank in BankAccounts.Where(ba => ba.BankAccountPermission == EntityPermissionEnum.User))
-    {
-        <div class="bank-card">
-            <h4>@bank.Name</h4>
-            <p>Wartość: @bank.Value</p>
-            <p>Numer konta: @bank.AccountNumber</p>
-        </div>
-    }
+<div class="mt-4">
+    <div class="text-center pb-2">
+        <h3>Pozostałe konta</h3>
+    </div>
+    <div class="bank-container">
+        @foreach (var bank in BankAccounts.Where(ba => ba.BankAccountPermission == EntityPermissionEnum.User))
+        {
+            <div class="bank-card rounded-3 bg-light text-dark">
+                <h4 class="text-center">@bank.Name</h4>
+                <p>Stan konta: @bank.Value</p>
+                <p>Numer konta: @bank.AccountNumber</p>
+                <div class="text-end">
+                    <a class="btn btn-info" href="/user/bank-account/@bank.Id">
+                        <span class="oi oi-brush" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
 </div>

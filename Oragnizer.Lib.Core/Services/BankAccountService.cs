@@ -31,6 +31,20 @@ public class BankAccountService : IBankAccountService
         }).ToList();
     }
 
+    public async Task<BankAccountResponse> GetBankAccountAsync(Guid userId, Guid bankId)
+    {
+        var bankAccount = await _bankAccountRepository.GetBankAccountWithOwnerAsync(userId, bankId);
+
+        return new BankAccountResponse()
+        {
+            Id = bankAccount.Id,
+            AccountNumber = bankAccount.AccountNumber,
+            Name = bankAccount.Name,
+            Value = bankAccount.Value,
+            BankAccountPermission = bankAccount.UserBankAccounts.First(u => u.UserId == userId).BankAccountPermission
+        };
+    }
+
     public async Task<OperationResult> CreateBankAccount(BankAccountCreateRequest request, Guid userId)
     {
         var bankAccount = new BankAccount()

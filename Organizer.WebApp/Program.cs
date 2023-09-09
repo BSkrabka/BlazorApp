@@ -1,4 +1,7 @@
 using Blazored.LocalStorage;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 using Organizer.Lib.Helper;
 using Organizer.Database.Storage;
 using Organizer.Database.Storage.Seeders;
@@ -13,6 +16,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
+builder.Services
+    .AddBlazorise(options =>
+    {
+        options.Immediate = true;
+    })
+    .AddBootstrapProviders()
+    .AddFontAwesomeIcons();
 
 builder.Services.AddStorageLibraryServices(builder.Configuration);
 builder.Services.AddCoreLibraryServices();

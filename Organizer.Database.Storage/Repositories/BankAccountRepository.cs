@@ -17,4 +17,11 @@ public class BankAccountRepository : BaseRepository<BankAccount>, IBankAccountRe
             .Where(ba => ba.UserBankAccounts.Any(u => u.UserId == userId))
             .ToListAsync();
     }
+
+    public async Task<BankAccount> GetBankAccountWithOwnerAsync(Guid userId, Guid bankId)
+    {
+        return await Context.BankAccounts
+            .Include(ba => ba.UserBankAccounts)
+            .FirstOrDefaultAsync(ba => ba.Id == bankId && ba.UserBankAccounts.Any(u => u.UserId == userId));
+    }
 }

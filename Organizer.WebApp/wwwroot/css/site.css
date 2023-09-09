@@ -2,6 +2,10 @@
 
 .bank-container {
     display: flex;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
     gap: 20px;
 }
@@ -9,7 +13,7 @@
 .bank-card {
     border: 1px solid #ccc;
     padding: 10px;
-    width: calc(50% - 10px);
+    width: calc(50% - 20px);
     box-sizing: border-box;
     margin-bottom: 20px;
 }

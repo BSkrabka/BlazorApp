@@ -20,10 +20,20 @@ public partial class BankAccount
     private AddBankAccountModal Modal { get; set; }
     private bool showLoginModal;
 
-    protected override async Task OnInitializedAsync()
+    private BaseModal baseModal;
+    private Guid bankAccountToRemoveId;
+
+    private async Task ShowConfirmationModal(Guid id)
     {
-        await GetBankAccounts();
+        bankAccountToRemoveId = id;
+        await baseModal.ShowModal("Czy na pewno chcesz usunąć to konto?", Remove);
     }
+
+    private void ShowAddModal()
+    {
+        Modal.ShowModal();
+    }
+
 
     private async Task<Guid?> GetUserId()
     {
@@ -32,6 +42,11 @@ public partial class BankAccount
         if (!result) { return null; }
 
         return userId;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetBankAccounts();
     }
 
     public async Task GetBankAccounts()
@@ -48,13 +63,14 @@ public partial class BankAccount
         StateHasChanged();
     }
 
-    private async Task Remove(Guid bankId)
+    private async Task Remove()
     {
         var userId = await GetUserId();
         if (userId == null) { return; }
 
-        await BankAccountService.RemoveBankAccount(bankId, userId.Value);
+        await BankAccountService.RemoveBankAccount(bankAccountToRemoveId, userId.Value);
 
         await GetBankAccounts();
+        StateHasChanged();
     }
 }
