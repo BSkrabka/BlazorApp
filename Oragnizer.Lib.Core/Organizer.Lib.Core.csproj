@@ -17,12 +17,12 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Providers\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Organizer.Database.Storage\Organizer.Database.Storage.csproj" />
     <ProjectReference Include="..\Organizer.Lib.Common\Organizer.Lib.Common.csproj" />
+    <ProjectReference Include="..\Organizer.Lib.Extension\Organizer.Lib.Extension.csproj" />
   </ItemGroup>
 
 </Project>

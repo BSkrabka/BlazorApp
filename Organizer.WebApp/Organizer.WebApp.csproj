@@ -40,7 +40,9 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\BankAccount.razor" />
+    <_ContentIncludedByDefault Remove="Pages\User\Apartment.razor" />
     <_ContentIncludedByDefault Remove="Pages\User\BankAccountDetails.razor" />
+    <_ContentIncludedByDefault Remove="Pages\User\Loan.razor" />
     <_ContentIncludedByDefault Remove="Shared\Logout.razor" />
     <_ContentIncludedByDefault Remove="Shared\Modals\BaseModal.razor" />
   </ItemGroup>
@@ -55,6 +57,14 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Pages\User\BankAccountDetails.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\User\Apartment.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\User\Loan.razor" />
   </ItemGroup>
 
 </Project>

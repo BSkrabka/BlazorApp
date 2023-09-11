@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Responses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Organizer.Database.Storage\Organizer.Database.Storage.csproj" />
+    <ProjectReference Include="..\Organizer.Lib.Common\Organizer.Lib.Common.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,33 @@
+﻿@page "/user/loan"
+<div class="container">
+    <div class="row">
+        <h3>Kredyty</h3>
+        <div class="col-md-12 text-end">
+            <button type="button" class="btn btn-success">Dodaj kredyt</button>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Do splaty</th>
+                <th>Następna płatność</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in Loans)
+            {
+                <tr>
+                    <td>@loan.Name</td>
+                    <td>@loan.CurrentValue</td>
+                    <td>@loan.NextRepayment</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => ShowRemoveConfirmationModal(loan.Id)">Usuń</button>
+                        <button class="btn btn-primary" @onclick="() => ShowDetails(loan.Id)">Szczegóły</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

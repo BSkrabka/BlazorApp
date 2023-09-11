@@ -1,0 +1,36 @@
+﻿@page "/user/apartment"
+<h1>Lista mieszkań</h1>
+<AddApartmentModal Create="Create" @ref="AddModal"></AddApartmentModal>
+<BaseModal @ref="baseModal"></BaseModal>
+<div class="row pb-2">
+    <div class="col-md-12 text-end">
+        <button type="button" class="btn btn-success" @onclick="ShowAddModal">Dodaj mieszkanie</button>
+    </div>
+</div>
+@if (Apartments.Count > 0)
+{
+    <div class="row">
+        @foreach (var apartment in Apartments)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <div class="text-end">
+                                <button class="btn btn-danger" @onclick="() => ShowRemoveConfirmationModal(apartment.Id)">
+                                    <span class="oi oi-trash" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <h5 class="card-title">@apartment.Name</h5>
+                        <button class="btn btn-danger" @onclick="(() => ShowRemoveConfirmationModal(apartment.Id))">Usuń</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Brak dostępnych mieszkań.</p>
+}

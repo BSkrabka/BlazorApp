@@ -10,19 +10,22 @@
     </div>
 
     <main>
-        <LoginModal @ref="Modal"></LoginModal>
-        <AuthorizeView>
-        <NotAuthorized>
-            <div class="top-row px-4">
-                <button class="btn btn-primary" @onclick="() => Modal.Open()">Zaloguj</button>
-            </div>
-        </NotAuthorized>
-        <Authorized>
-            <div class="top-row px-4">
-                <button class="btn btn-primary" @onclick="@(() => _nav.NavigateTo("/logout"))">Wyloguj</button>
-            </div>
-        </Authorized>
-        </AuthorizeView>
+        <div style="background-color: rgb(5, 39, 103)">
+            <LoginModal @ref="Modal"></LoginModal>
+            <AuthorizeView>
+                <NotAuthorized>
+                        <div style="background-color: rgba(0,0,0,0.4)" class="top-row px-4">
+                        <button class="btn btn-primary" @onclick="() => Modal.Open()">Zaloguj</button>
+                    </div>
+                </NotAuthorized>
+                <Authorized>
+                        <div style="background-color: rgba(0,0,0,0.4)" class="top-row px-4">
+                        <button class="btn btn-primary" @onclick="@(() => _nav.NavigateTo("/logout"))">Wyloguj</button>
+                    </div>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+
         <article class="content px-4">
             @Body
         </article>

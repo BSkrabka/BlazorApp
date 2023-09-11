@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Organizer.Database.Storage;
 
@@ -11,9 +12,11 @@ using Organizer.Database.Storage;
 namespace Organizer.Database.Storage.Migrations
 {
     [DbContext(typeof(OrganizerDbContext))]
-    partial class OrganizerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230911184705_ModifyLoanAndBank")]
+    partial class ModifyLoanAndBank
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

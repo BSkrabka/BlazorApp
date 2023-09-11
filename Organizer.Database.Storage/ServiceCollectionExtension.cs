@@ -16,6 +16,8 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IBankAccountRepository, BankAccountRepository>();
+        services.AddScoped<ILoanRepository, LoanRepository>();
+        services.AddScoped<IApartmentRepository, ApartmentRepository>();
 
         return services;
     }

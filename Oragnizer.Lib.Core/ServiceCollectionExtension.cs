@@ -14,6 +14,8 @@ public static class ServiceCollectionExtension
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IBankAccountService, BankAccountService>();
+        services.AddScoped<IApartmentService, ApartmentService>();
+        services.AddScoped<ILoanService, LoanService>();
 
         return services;
     }

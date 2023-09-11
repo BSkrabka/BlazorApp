@@ -1,0 +1,35 @@
+﻿@page "/AddApartmentModal"
+<div class="modal" tabindex="-1" role="dialog" style="display: @(showModal ? "block" : "none")">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dodaj mieszkanie</h5>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Zamknij" @onclick="CloseModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @if (ShowAddError)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <p>@Error</p>
+                </div>
+            }
+            <div class="modal-body">
+                <EditForm Model="Request" OnSubmit="CreateApartment">
+                    <div class="form-group">
+                        <label for="email">Nazwa konta:</label>
+                        <InputText @bind-Value="Request.Name" type="text" class="form-control" id="login" placeholder="Nazwa" />
+                    </div>
+                </EditForm>
+            </div>
+            <div class="modal-footer">
+                <button @onclick="CloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                <button @onclick="CreateApartment" type="submit" class="btn btn-primary">Utwórz</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}

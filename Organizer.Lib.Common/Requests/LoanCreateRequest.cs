@@ -1,12 +1,13 @@
-﻿namespace Organizer.Database.Storage.Tables;
+﻿namespace Organizer.Lib.Common.Requests;
 
-public class Loan : BaseEntity
+public class LoanCreateRequest
 {
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public string AccountNumber { get; set; }
 
     public double BaseValue { get; set; }
-    public double CurrentValue { get; set; }
+
+    public int RepaymentDay { get; set; }
     public DateTime FinalRepaymentAt { get; set; }
-    public DateTime NextRepayment { get; set; }
 }
